@@ -397,6 +397,18 @@ pluginBundle {
     }
 }
 
+publishing {
+    repositories {
+        maven {
+            url = version.endsWith("SNAPSHOT") ? "${enterpriseRepositorySnapshots}" : "${enterpriseRepositoryReleases}"
+            credentials {
+                username = "${enterpriseRepositoryUser}"
+                password = "${enterpriseRepositoryPassword}"
+            }
+        }
+    }
+}
+
 
 /***********************************************************************************************************************
  *
