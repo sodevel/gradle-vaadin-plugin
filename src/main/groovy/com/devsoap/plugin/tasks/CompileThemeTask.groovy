@@ -27,6 +27,10 @@ import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputDirectory
+import org.gradle.api.tasks.Optional
+import org.gradle.api.tasks.PathSensitive
+import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
 import org.gradle.tooling.BuildActionFailureException
 
@@ -65,10 +69,21 @@ class CompileThemeTask extends DefaultTask {
 
     private static final String STYLES_SCSS = 'styles.scss'
 
+    // WARNING: NOT OPTIONAL, but too difficult to supply a default value here,
+    //          requires a manual clean-rebuild if the default changed
+    @InputDirectory
+    @PathSensitive(PathSensitivity.RELATIVE)
+    @Optional
     private final Property<String> themesDirectory = project.objects.property(String)
+    @Input
     private final Property<String> compiler = project.objects.property(String)
+    @Input
     private final Property<Boolean> compress = project.objects.property(Boolean)
+    // NOTE: This gets set from an extension object
+    @Input
     private final Property<Boolean> useClasspathJar = project.objects.property(Boolean)
+    @Input
+    @Optional
     private final ListProperty<String> jvmArgs = project.objects.listProperty(String)
 
     /**
@@ -78,7 +93,6 @@ class CompileThemeTask extends DefaultTask {
         dependsOn('classes', BuildClassPathJar.NAME, UpdateAddonStylesTask.NAME)
         description = 'Compiles a Vaadin SASS theme into CSS'
 
-        themesDirectory.set(null)
         compiler.set(VAADIN_COMPILER)
         compress.set(true)
 
@@ -125,7 +139,6 @@ class CompileThemeTask extends DefaultTask {
      *         <li>libsass - Libsass SASS Compiler</li>
      *     </ul>
      */
-    @Input
     String getCompiler() {
         compiler.get()
     }
@@ -147,7 +160,6 @@ class CompileThemeTask extends DefaultTask {
     /**
      * Is theme compression in use
      */
-    @Input
     Boolean getCompress() {
         compress.get()
     }

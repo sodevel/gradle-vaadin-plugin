@@ -32,6 +32,14 @@ import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.CacheableTask
+import org.gradle.api.tasks.Console
+import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputFiles
+import org.gradle.api.tasks.Internal
+import org.gradle.api.tasks.Optional
+import org.gradle.api.tasks.OutputDirectory
+import org.gradle.api.tasks.PathSensitive
+import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
 
 import java.util.concurrent.TimeUnit
@@ -51,31 +59,72 @@ class CompileWidgetsetTask extends DefaultTask {
 
     private static final WIDGETSET_CDN_URL = 'https://wsc.vaadin.com/'
 
+    @Input
     private final Property<String> style = project.objects.property(String)
+    @Input
     private final Property<Integer> optimize = project.objects.property(Integer)
+    @Console
     private final Property<Boolean> logEnabled = project.objects.property(Boolean)
+    @Console
     private final Property<String> logLevel = project.objects.property(String)
+    @Input
     private final Property<Integer> localWorkers = project.objects.property(Integer)
+    @Input
     private final Property<Boolean> draftCompile = project.objects.property(Boolean)
+    @Input
     private final Property<Boolean> strict = project.objects.property(Boolean)
+    @Input
+    @Optional
     private final Property<String> userAgent = project.objects.property(String)
+    @Input
     private final ListProperty<String> jvmArgs = project.objects.listProperty(String)
+    @Input
     private final ListProperty<String> extraArgs = project.objects.listProperty(String)
+    @InputFiles
+    @PathSensitive(PathSensitivity.RELATIVE)
     private final ListProperty<String> sourcePaths = project.objects.listProperty(String)
+    @Input
     private final Property<Boolean> collapsePermutations = project.objects.property(Boolean)
+    @Input
     private final ListProperty<String> extraInherits = project.objects.listProperty(String)
+    @Input
     private final Property<Boolean> gwtSdkFirstInClasspath = project.objects.property(Boolean)
+    // WARNING: NOT OPTIONAL, but too difficult to supply a default value here,
+    //          requires a manual clean-rebuild if the default changed
+    @OutputDirectory
+    @Optional
     private final Property<String> outputDirectory = project.objects.property(String)
+    @Input
     private final Property<Boolean> widgetsetCDN = project.objects.property(Boolean)
+    @Input
     private final Property<Boolean> profiler = project.objects.property(Boolean)
+    @Input
     private final Property<Boolean> manageWidgetset = project.objects.property(Boolean)
+    // WARNING: NOT OPTIONAL, but too difficult to supply a default value here,
+    //          requires a manual clean-rebuild if the default changed
+    @Input
+    @Optional
     private final Property<String> widgetset = project.objects.property(String)
+    // WARNING: NOT OPTIONAL, but too difficult to supply a default value here,
+    //          requires a manual clean-rebuild if the default changed
+    @Input
+    @Optional
     private final Property<String> widgetsetGenerator = project.objects.property(String)
 
+    // NOTE: This gets set from an extension object
+    @Internal
     private final Property<Boolean> proxyEnabled = project.objects.property(Boolean)
+    // NOTE: This gets set from an extension object
+    @Internal
     private final Property<Integer> proxyPort = project.objects.property(Integer)
+    // NOTE: This gets set from an extension object
+    @Internal
     private final Property<String> proxyScheme = project.objects.property(String)
+    // NOTE: This gets set from an extension object
+    @Internal
     private final Property<String> proxyHost = project.objects.property(String)
+    // NOTE: This gets set from an extension object
+    @Internal
     private final Property<AuthConfig> proxyAuth = project.objects.property(AuthConfig)
 
     private Closure<Map> queryWidgetsetRequest = { version, style ->
@@ -198,19 +247,15 @@ class CompileWidgetsetTask extends DefaultTask {
         localWorkers.set(Runtime.getRuntime().availableProcessors())
         draftCompile.set(true)
         strict.set(true)
-        userAgent.set(null)
         jvmArgs.empty()
         extraArgs.empty()
         sourcePaths.set(['client', 'shared'])
         collapsePermutations.set(true)
         extraInherits.empty()
         gwtSdkFirstInClasspath.set(true)
-        outputDirectory.set(null)
         widgetsetCDN.set(false)
         profiler.set(false)
         manageWidgetset.set(true)
-        widgetset.set(null)
-        widgetsetGenerator.set(null)
 
         project.afterEvaluate {
 

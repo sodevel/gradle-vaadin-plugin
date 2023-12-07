@@ -18,6 +18,9 @@ package com.devsoap.plugin.tasks
 import com.devsoap.plugin.MessageLogger
 import com.devsoap.plugin.servers.ApplicationServer
 import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputDirectory
+import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.options.Option
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
@@ -56,13 +59,23 @@ class RunTask extends DefaultTask {
     @Option(option = 'nobrowser', description = 'Do not open browser after server has started')
     boolean nobrowser = false
 
+    @Input
     private final Property<String> server = project.objects.property(String)
+    @Input
     private final Property<Boolean> debug = project.objects.property(Boolean)
+    @Input
     private final Property<Integer> debugPort = project.objects.property(Integer)
+    @Input
     private final ListProperty<String> jvmArgs = project.objects.listProperty(String)
+    @Input
     private final Property<Integer> serverPort = project.objects.property(Integer)
+    @Input
     private final Property<Boolean> themeAutoRecompile = project.objects.property(Boolean)
+    @Input
     private final Property<Boolean> openInBrowser = project.objects.property(Boolean)
+    // WARNING: Not really optional, but sometimes the default gets sourced from elsewhere
+    @InputDirectory
+    @Optional
     private final Property<String> classesDir = project.objects.property(String)
 
     /**
@@ -96,7 +109,6 @@ class RunTask extends DefaultTask {
         serverPort.set(8080)
         themeAutoRecompile.set(true)
         openInBrowser.set(true)
-        classesDir.set(null)
     }
 
     /**
@@ -183,7 +195,7 @@ class RunTask extends DefaultTask {
 
     /**
      * Should the server restart after every change.
-     * 
+     *
      * @deprecated No longer in use since JVM hotswapping was taken into use in 1.2.4
      */
     @Deprecated
