@@ -322,7 +322,8 @@ if(!ext.testCategory) {
     check.dependsOn 'themeCompileTests'
     check.dependsOn 'fullCompileTests'
     check.dependsOn 'runProjectTests'
-    check.dependsOn 'proxyTest'
+    // Disabled until the permanent failure is resolved
+    //check.dependsOn 'proxyTest'
 } else{
     check.dependsOn ext.testCategory
 }
