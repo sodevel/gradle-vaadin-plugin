@@ -73,6 +73,9 @@ class Util {
     private static final String INFO_LOG_MARKER = '[INFO]'
     private static final String STREAM_CLOSED_LOG_MESSAGE = 'Stream was closed'
     private static final String VAADIN = 'VAADIN'
+    private static final String GRADLE_HOME = 'org.gradle.java.home'
+    private static final String JAVA_HOME = 'java.home'
+    private static final String JAVA_BIN_NAME = 'java'
     private static final String GWT_MODULE_POSTFIX = '.gwt.xml'
     private static final String CLIENT_PACKAGE_NAME = 'client'
     private static final String VAADIN_CLIENT_DENDENCY = 'vaadin-client'
@@ -899,12 +902,31 @@ class Util {
      */
     @Memoized
     static String getJavaBinary(Project project) {
-        def toolchain = project.getExtensions().getByType(JavaPluginExtension.class).toolchain
+        try {
+            def toolchain = project.getExtensions().getByType(JavaPluginExtension.class).toolchain
 
-        JavaToolchainService service = project.getExtensions().getByType(JavaToolchainService.class)
-        Provider<JavaLauncher> launcher = service.launcherFor(toolchain)
+            JavaToolchainService service = project.getExtensions().getByType(JavaToolchainService.class)
+            Provider<JavaLauncher> launcher = service.launcherFor(toolchain)
 
-        launcher.get().executablePath.asFile.canonicalPath
+            return launcher.get().executablePath.asFile.canonicalPath
+        } catch (ignored) {}
+
+        String javaHome
+        if ( project.hasProperty(GRADLE_HOME) ) {
+            javaHome = project.properties[GRADLE_HOME]
+        } else if ( System.getProperty(JAVA_HOME) ) {
+            javaHome = System.getProperty(JAVA_HOME)
+        }
+
+        if ( javaHome ) {
+            File javaBin = new File(javaHome, 'bin')
+            File java = new File(javaBin, JAVA_BIN_NAME)
+            return java.canonicalPath
+        }
+
+        // Fallback to Java on PATH with a warning
+        project.logger.warn('Could not determine where the Java JRE is located, is JAVA_HOME set?')
+        JAVA_BIN_NAME
     }
 
     /**
