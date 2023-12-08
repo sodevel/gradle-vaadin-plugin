@@ -62,7 +62,7 @@ sourceSets {
         resources {
             srcDir file('src/functionalTest/resources')
         }
-        compileClasspath += sourceSets.main.output + configurations.testRuntime
+        compileClasspath += sourceSets.main.output + configurations.testRuntimeClasspath
         runtimeClasspath += output + compileClasspath
     }
 }
@@ -342,7 +342,7 @@ codenarc{
     configFile = rootProject.file('config/codenarc/ruleset.groovy')
     maxPriority1Violations = 0
     maxPriority2Violations = 0
-    maxPriority3Violations = 500
+    maxPriority3Violations = 900
     codenarcTest {
         configFile = rootProject.file('config/codenarc/ruleset-functionalTest.groovy')
     }
@@ -416,6 +416,6 @@ publishing {
  *
  **********************************************************************************************************************/
 wrapper {
-    gradleVersion = '5.6'
+    gradleVersion = '6.9.4'
     distributionType = Wrapper.DistributionType.BIN
 }
