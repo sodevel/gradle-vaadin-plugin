@@ -35,7 +35,7 @@ class GrettyAction extends PluginAction{
 
     @Override
     String getPluginId() {
-        'org.akhikhl.gretty'
+        'org.gretty'
     }
 
     @Override
