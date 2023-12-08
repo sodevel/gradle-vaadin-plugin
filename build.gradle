@@ -77,7 +77,6 @@ repositories{
 }
 
 configurations {
-    deploy
     proxyTest
 }
 
@@ -99,8 +98,6 @@ dependencies {
 
     // Sass compilation with libSass
     implementation "io.bit3:jsass:${project.property('jsass.version')}"
-
-    deploy 'org.apache.maven.wagon:wagon-ssh:2.2'
 
     testImplementation gradleTestKit()
     testImplementation 'junit:junit:4.13-beta-3'
