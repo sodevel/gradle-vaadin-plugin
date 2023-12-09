@@ -89,7 +89,7 @@ class DevModeTask extends DefaultTask {
         description = "Run Development Mode for easier debugging and development of client widgets."
         Runtime.getRuntime().addShutdownHook(cleanupThread)
 
-        server.set('payara')
+        server.set('jetty')
         debug.set(true)
         debugPort.set(8000)
         jvmArgs.empty()

@@ -90,7 +90,7 @@ class SuperDevModeTask extends DefaultTask {
         description = "Run Super Development Mode for easier client widget development."
         Runtime.getRuntime().addShutdownHook(cleanupThread)
 
-        server.set('payara')
+        server.set('jetty')
         debug.set(true)
         debugPort.set(8000)
         jvmArgs.empty()

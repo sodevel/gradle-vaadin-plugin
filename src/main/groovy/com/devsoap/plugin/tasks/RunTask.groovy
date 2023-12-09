@@ -89,7 +89,7 @@ class RunTask extends DefaultTask {
         description = 'Runs the Vaadin application'
         Runtime.getRuntime().addShutdownHook(cleanupThread)
 
-        server.set('payara')
+        server.set('jetty')
         debug.set(true)
         debugPort.set(8000)
         jvmArgs.empty()
