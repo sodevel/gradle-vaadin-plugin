@@ -15,11 +15,11 @@
  */
 package com.devsoap.plugin;
 
-import org.glassfish.embeddable.BootstrapProperties;
-import org.glassfish.embeddable.Deployer;
-import org.glassfish.embeddable.GlassFish;
-import org.glassfish.embeddable.GlassFishProperties;
-import org.glassfish.embeddable.GlassFishRuntime;
+//import org.glassfish.embeddable.BootstrapProperties;
+//import org.glassfish.embeddable.Deployer;
+//import org.glassfish.embeddable.GlassFish;
+//import org.glassfish.embeddable.GlassFishProperties;
+//import org.glassfish.embeddable.GlassFishRuntime;
 
 import java.io.File;
 import java.util.logging.Level;
@@ -34,7 +34,7 @@ public class PayaraServerRunner {
 
     private static final Logger LOGGER = Logger.getLogger(PayaraServerRunner.class.getName());
 
-    // Usage: 'PayaraServerRunner [port] [webbappdir] [classesdir] [resourcesdir] [LogLevel] [name] [workdir]'
+    // Usage: 'PayaraServerRunner [port] [webbappdir] [classesdir] [resourcesdir] [LogLevel] [name] [workdir]'
     public static void main(String[] args) throws Exception {
         int port = Integer.parseInt(args[0]);
         Level logLevel = Level.parse(args[4]);
@@ -49,7 +49,9 @@ public class PayaraServerRunner {
         LOGGER.log(Level.INFO, "Starting Payara web server...");
 
         try {
+            throw new Exception("Payara server disabled");
 
+/*
             BootstrapProperties bootstrap = new BootstrapProperties();
 
             GlassFishRuntime runtime = GlassFishRuntime.bootstrap(bootstrap,
@@ -68,6 +70,7 @@ public class PayaraServerRunner {
             File explodedWar = new File(work, "war");
 
             deployer.deploy(explodedWar, "--contextroot=");
+*/
 
         } catch (Exception ex){
             LOGGER.log(Level.SEVERE, "Failed to start Payara server", ex);

@@ -90,14 +90,18 @@ dependencies {
     implementation "org.eclipse.jetty:jetty-plus:${project.property('jetty.version')}"
     implementation "org.eclipse.jetty:jetty-deploy:${project.property('jetty.version')}"
 
-    //Payara application server
-    implementation "fish.payara.extras:payara-embedded-web:${project.property('payara.version')}"
+    // Payara application server
+    // NOTE: Disabled, because this breaks JCIFS for some unknown reason
+    //implementation "fish.payara.extras:payara-embedded-web:${project.property('payara.version')}"
 
     // For GET requests
     implementation 'org.codehaus.groovy.modules.http-builder:http-builder:0.7.1'
 
     // Sass compilation with libSass
     implementation "io.bit3:jsass:${project.property('jsass.version')}"
+
+    // For SpringBootExtension
+    implementation "javax.validation:validation-api:${project.property('validation.api.version')}"
 
     testImplementation gradleTestKit()
     testImplementation 'junit:junit:4.13-beta-3'
