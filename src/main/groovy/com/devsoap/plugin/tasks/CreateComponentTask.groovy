@@ -18,6 +18,7 @@ package com.devsoap.plugin.tasks
 import com.devsoap.plugin.Util
 import com.devsoap.plugin.creators.ComponentCreator
 import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.options.Option
 import org.gradle.api.tasks.TaskAction
 
@@ -35,6 +36,7 @@ class CreateComponentTask extends DefaultTask {
      * The component name
      */
     @Option(option = 'name', description = 'Component name')
+    @Input
     String componentName = 'MyComponent'
 
     CreateComponentTask() {

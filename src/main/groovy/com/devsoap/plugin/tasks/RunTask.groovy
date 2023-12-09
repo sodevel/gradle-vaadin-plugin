@@ -50,6 +50,7 @@ class RunTask extends DefaultTask {
      * Should the server be stopped after it has been started
      */
     @Option(option = 'stopAfterStart', description = 'Should the server stop after starting')
+    @Input
     boolean stopAfterStarting = false
 
     /**
@@ -57,6 +58,7 @@ class RunTask extends DefaultTask {
      */
     // FIXME Is this duplicate to the property openInBrowser?
     @Option(option = 'nobrowser', description = 'Do not open browser after server has started')
+    @Input
     boolean nobrowser = false
 
     @Input

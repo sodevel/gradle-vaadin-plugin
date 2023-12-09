@@ -41,6 +41,7 @@ class CreateAddonThemeTask extends DefaultTask {
      * The theme name
      */
     @Option(option = 'name', description = 'Theme name')
+    @Input
     String themeName = 'MyAddonTheme'
 
 
