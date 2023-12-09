@@ -255,28 +255,6 @@ class SuperDevModeTask extends DefaultTask {
     }
 
     /**
-     * Should the server restart after every change.
-     *
-     * @deprecated No longer in use since JVM hotswapping was taken into use in 1.2.4
-     */
-    @Deprecated
-    Boolean getServerRestart() {
-        MessageLogger.nagUserOfDiscontinuedProperty(new Throwable(RunTask.SERVER_RESTART_DEPRECATED_MESSAGE))
-        false
-    }
-
-    /**
-     * Should the server restart after every change.
-     *
-     * @deprecated No longer in use since JVM hotswapping was taken into use in 1.2.4
-     */
-    @Deprecated
-    void setServerRestart(Boolean restart) {
-        MessageLogger.nagUserOfDiscontinuedProperty(new Throwable(RunTask.SERVER_RESTART_DEPRECATED_MESSAGE))
-        restart
-    }
-
-    /**
      * The port the vaadin application should run on
      */
     Integer getServerPort() {
