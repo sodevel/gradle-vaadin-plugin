@@ -47,24 +47,24 @@ class GrettyAction extends PluginAction{
         // Delegate to bootRun if spring boot is present
         project.tasks.findByName(RunTask.NAME).dependsOn(GRETTY_RUN_TASK)
 
-        project.configurations[GradleVaadinPlugin.CONFIGURATION_SERVER].dependencies.each {
-            project.dependencies.add(GRETTY_CONFIGURATION, "$it.group:$it.name:$it.version")
-        }
+        project.configurations[GRETTY_CONFIGURATION].extendsFrom(
+            project.configurations[GradleVaadinPlugin.CONFIGURATION_SERVER]
+        )
 
-        project.configurations[GradleVaadinPlugin.CONFIGURATION_CLIENT_COMPILE].dependencies.each {
-            project.dependencies.add(GRETTY_CONFIGURATION, "$it.group:$it.name:$it.version")
-        }
+        project.configurations[GRETTY_CONFIGURATION].extendsFrom(
+            project.configurations[GradleVaadinPlugin.CONFIGURATION_CLIENT_COMPILE]
+        )
 
         if (!Util.getWidgetset(project)) {
-            project.configurations[GradleVaadinPlugin.CONFIGURATION_CLIENT].dependencies.each {
-                project.dependencies.add(GRETTY_CONFIGURATION, "$it.group:$it.name:$it.version")
-            }
+            project.configurations[GRETTY_CONFIGURATION].extendsFrom(
+                project.configurations[GradleVaadinPlugin.CONFIGURATION_CLIENT]
+            )
         }
 
-        if (Util.isPushEnabled(project)){
-            project.configurations[GradleVaadinPlugin.CONFIGURATION_PUSH].dependencies.each {
-                project.dependencies.add(GRETTY_CONFIGURATION, "$it.group:$it.name:$it.version")
-            }
+        if (Util.isPushEnabled(project)) {
+            project.configurations[GRETTY_CONFIGURATION].extendsFrom(
+                project.configurations[GradleVaadinPlugin.CONFIGURATION_PUSH]
+            )
         }
     }
 
