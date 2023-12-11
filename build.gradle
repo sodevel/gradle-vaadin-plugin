@@ -85,7 +85,7 @@ dependencies {
     implementation localGroovy()
 
     // Jetty application server
-    implementation "org.eclipse.jetty.aggregate:jetty-all:${project.property('jetty.version')}"
+    implementation "org.eclipse.jetty:jetty-server:${project.property('jetty.version')}"
     implementation "org.eclipse.jetty:jetty-annotations:${project.property('jetty.version')}"
     implementation "org.eclipse.jetty:jetty-plus:${project.property('jetty.version')}"
     implementation "org.eclipse.jetty:jetty-deploy:${project.property('jetty.version')}"
