@@ -34,7 +34,7 @@ class ProxyTest extends IntegrationTest {
     void 'Test widgetset CDN behind proxy'() {
         buildFile << """
             dependencies {
-                compile 'org.vaadin.addons:qrcode:+'
+                implementation 'org.vaadin.addons:qrcode:+'
             }
 
             vaadinCompile {
