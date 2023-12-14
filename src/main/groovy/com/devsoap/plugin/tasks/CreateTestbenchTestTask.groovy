@@ -20,6 +20,7 @@ import com.devsoap.plugin.TemplateUtil
 import com.devsoap.plugin.Util
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
+import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.options.Option
 import org.gradle.api.tasks.TaskAction
 
@@ -36,12 +37,14 @@ class CreateTestbenchTestTask extends DefaultTask {
      * The test class name
      */
     @Option(option = 'name', description = 'Test name')
+    @Input
     String testName = 'MyTest'
 
     /**
      * The test package
      */
     @Option(option = 'package', description = 'Test package')
+    @Input
     String testPackage = 'com.example.tests'
 
     CreateTestbenchTestTask() {

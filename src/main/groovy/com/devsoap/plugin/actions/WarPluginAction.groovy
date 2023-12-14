@@ -18,6 +18,7 @@ package com.devsoap.plugin.actions
 import com.devsoap.plugin.Util
 import com.devsoap.plugin.tasks.CompileThemeTask
 import com.devsoap.plugin.tasks.CompileWidgetsetTask
+import com.devsoap.plugin.tasks.CompressCssTask
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.plugins.WarPlugin
@@ -53,6 +54,7 @@ class WarPluginAction extends PluginAction {
         War war = (War) project.tasks.getByName(pluginId)
         war.dependsOn(CompileWidgetsetTask.NAME)
         war.dependsOn(CompileThemeTask.NAME)
+        war.dependsOn(CompressCssTask.NAME)
     }
 
     @Override

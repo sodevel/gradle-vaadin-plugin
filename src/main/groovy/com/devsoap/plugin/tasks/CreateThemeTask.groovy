@@ -19,6 +19,8 @@ import com.devsoap.plugin.Util
 import com.devsoap.plugin.creators.ThemeCreator
 import com.devsoap.plugin.extensions.VaadinPluginExtension
 import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.options.Option
 import org.gradle.api.tasks.TaskAction
 
@@ -35,7 +37,11 @@ class CreateThemeTask extends DefaultTask {
     /**
      * The theme name
      */
+    // WARNING: NOT OPTIONAL, but too difficult to supply a default value here,
+    //          requires a manual clean-rebuild if the default changed
     @Option(option = 'name', description = 'Theme name')
+    @Input
+    @Optional
     String themeName
 
     CreateThemeTask() {

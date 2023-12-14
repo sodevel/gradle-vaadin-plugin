@@ -22,7 +22,11 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
+import org.gradle.api.tasks.Console
+import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.Internal
+import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
 
 /**
@@ -49,18 +53,33 @@ class DevModeTask extends DefaultTask {
     @Internal
     ApplicationServer serverInstance
 
+    @Input
     private final Property<String> server = project.objects.property(String)
+    @Input
     private final Property<Boolean> debug = project.objects.property(Boolean)
+    @Input
     private final Property<Integer> debugPort = project.objects.property(Integer)
+    @Input
     private final ListProperty<String> jvmArgs = project.objects.listProperty(String)
+    @Input
     private final Property<Integer> serverPort = project.objects.property(Integer)
+    @Input
     private final Property<Boolean> themeAutoRecompile = project.objects.property(Boolean)
+    @Input
     private final Property<Boolean> openInBrowser = project.objects.property(Boolean)
+    // WARNING: Not really optional, but sometimes the default gets sourced from elsewhere
+    @InputDirectory
+    @Optional
     private final Property<String> classesDir = project.objects.property(String)
+    @Input
     private final Property<Boolean> noserver = project.objects.property(Boolean)
+    @Input
     private final Property<String> bindAddress = project.objects.property(String)
+    @Input
     private final Property<Integer> codeServerPort = project.objects.property(Integer)
+    @Input
     private final ListProperty<String> extraArgs = project.objects.listProperty(String)
+    @Console
     private final Property<String> logLevel = project.objects.property(String)
 
     /**
@@ -96,7 +115,6 @@ class DevModeTask extends DefaultTask {
         serverPort.set(8080)
         themeAutoRecompile.set(true)
         openInBrowser.set(true)
-        classesDir.set(null)
         noserver.set(false)
         bindAddress.set('127.0.0.1')
         codeServerPort.set(9997)
@@ -238,28 +256,6 @@ class DevModeTask extends DefaultTask {
      */
     void setJvmArgs(String[] args) {
         jvmArgs.set(Arrays.asList(args))
-    }
-
-    /**
-     * Should the server restart after every change.
-     *
-     * @deprecated No longer in use since JVM hotswapping was taken into use in 1.2.4
-     */
-    @Deprecated
-    Boolean getServerRestart() {
-        MessageLogger.nagUserOfDiscontinuedProperty(new Throwable(RunTask.SERVER_RESTART_DEPRECATED_MESSAGE))
-        false
-    }
-
-    /**
-     * Should the server restart after every change.
-     *
-     * @deprecated No longer in use since JVM hotswapping was taken into use in 1.2.4
-     */
-    @Deprecated
-    void setServerRestart(Boolean restart) {
-        MessageLogger.nagUserOfDiscontinuedProperty(new Throwable(RunTask.SERVER_RESTART_DEPRECATED_MESSAGE))
-        restart
     }
 
     /**
