@@ -87,10 +87,7 @@ dependencies {
     // Jetty application server
     implementation "org.eclipse.jetty:jetty-server:${project.property('jetty.version')}"
     implementation "org.eclipse.jetty:jetty-annotations:${project.property('jetty.version')}"
-    implementation "org.eclipse.jetty:jetty-continuation:${project.property('jetty.version')}"
-    implementation "org.eclipse.jetty:jetty-deploy:${project.property('jetty.version')}"
     implementation "org.eclipse.jetty:jetty-plus:${project.property('jetty.version')}"
-    implementation "org.eclipse.jetty.websocket:websocket-server:${project.property('jetty.version')}"
 
     // Payara application server
     // NOTE: Disabled, because this breaks JCIFS for some unknown reason
