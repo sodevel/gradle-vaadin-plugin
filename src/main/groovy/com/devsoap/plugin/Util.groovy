@@ -34,8 +34,12 @@ import org.gradle.api.file.FileVisitDetails
 import org.gradle.api.file.SourceDirectorySet
 import org.gradle.api.logging.LogLevel
 import org.gradle.api.plugins.JavaPluginConvention
+import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.plugins.WarPluginConvention
+import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.SourceSet
+import org.gradle.jvm.toolchain.JavaLauncher
+import org.gradle.jvm.toolchain.JavaToolchainService
 import org.gradle.util.VersionNumber
 
 import java.awt.*
@@ -898,6 +902,15 @@ class Util {
      */
     @Memoized
     static String getJavaBinary(Project project) {
+        try {
+            def toolchain = project.getExtensions().getByType(JavaPluginExtension.class).toolchain
+
+            JavaToolchainService service = project.getExtensions().getByType(JavaToolchainService.class)
+            Provider<JavaLauncher> launcher = service.launcherFor(toolchain)
+
+            return launcher.get().executablePath.asFile.canonicalPath
+        } catch (ignored) {}
+
         String javaHome
         if ( project.hasProperty(GRADLE_HOME) ) {
             javaHome = project.properties[GRADLE_HOME]
