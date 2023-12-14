@@ -111,7 +111,7 @@ class WARArchiveTest extends IntegrationTest {
     @Test void 'Provided and runtime dependencies not included'() {
         buildFile << """
         dependencies {
-            runtime 'commons-lang:commons-lang:2.6'
+            runtimeOnly 'commons-lang:commons-lang:2.6'
             compileOnly 'commons-lang:commons-lang:2.6'
             providedCompile 'commons-lang:commons-lang:2.6'
         }

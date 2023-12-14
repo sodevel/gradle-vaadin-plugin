@@ -532,8 +532,7 @@ class GradleVaadinPlugin implements Plugin<Project> {
 
                     // Needed so bootRepackage can include all dependencies in Jar
                     conf.extendsFrom(
-                            project.configurations['compile'],
-                            project.configurations['runtime'],
+                            project.configurations['implementation'],
                             project.configurations[CONFIGURATION_PUSH],
                             project.configurations[CONFIGURATION_CLIENT_COMPILE]
                     )

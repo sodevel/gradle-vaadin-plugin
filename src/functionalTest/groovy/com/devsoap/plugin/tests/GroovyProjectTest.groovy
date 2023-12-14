@@ -24,7 +24,7 @@ class GroovyProjectTest extends IntegrationTest {
            }
 
            dependencies {
-                compile 'org.codehaus.groovy:groovy-all:2.4.+'
+                implementation 'org.codehaus.groovy:groovy-all:2.4.+'
            }
 
         """.stripIndent()

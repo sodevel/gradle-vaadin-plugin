@@ -69,8 +69,8 @@ class MultimoduleWidgetsetThemeTest extends MultiProjectIntegrationTest {
             project.tasks.vaadinUpdateAddonStyles.enabled = false
 
             dependencies {
-                compile project(':theme-module')
-                compile project(':widgetset-module')
+                implementation project(':theme-module')
+                implementation project(':widgetset-module')
             }
         """.stripIndent()
 
@@ -91,7 +91,7 @@ class MultimoduleWidgetsetThemeTest extends MultiProjectIntegrationTest {
             vaadin.useClassPathJar = true
 
             dependencies {
-                compile project(':theme-module')
+                implementation project(':theme-module')
             }
         """.stripIndent()
 

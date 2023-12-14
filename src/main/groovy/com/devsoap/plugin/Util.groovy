@@ -827,7 +827,7 @@ class Util {
         classpath += project.configurations[GradleVaadinPlugin.CONFIGURATION_CLIENT_COMPILE]
 
         // Include runtime dependencies
-        classpath += project.configurations.runtime
+        classpath += project.configurations.runtimeClasspath
 
         // Include push dependencies if enabled
         if ( isPushEnabled(project) ) {
