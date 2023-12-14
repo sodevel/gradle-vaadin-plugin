@@ -53,21 +53,29 @@ class JettyApplicationServer extends ApplicationServer {
 
     @Override
     void defineDependecies(DependencyHandler projectDependencies, DependencySet dependencies) {
-        Dependency jettyAll =  projectDependencies.create(
+        Dependency jettyServer =  projectDependencies.create(
                 "org.eclipse.jetty:jetty-server:${Util.pluginProperties.getProperty(JETTY_VERSION_PROPERTY)}")
-        dependencies.add(jettyAll)
+        dependencies.add(jettyServer)
 
         Dependency jettyAnnotations = projectDependencies.create("org.eclipse.jetty:jetty-annotations:" +
                 "${Util.pluginProperties.getProperty(JETTY_VERSION_PROPERTY)}")
         dependencies.add(jettyAnnotations)
 
-        Dependency jettyPlus = projectDependencies.create(
-                "org.eclipse.jetty:jetty-plus:${Util.pluginProperties.getProperty(JETTY_VERSION_PROPERTY)}")
-        dependencies.add(jettyPlus)
+        Dependency jettyContinuation = projectDependencies.create("org.eclipse.jetty:jetty-continuation:" +
+                "${Util.pluginProperties.getProperty(JETTY_VERSION_PROPERTY)}")
+        dependencies.add(jettyContinuation)
 
         Dependency jettyDeploy = projectDependencies.create(
                 "org.eclipse.jetty:jetty-deploy:${Util.pluginProperties.getProperty(JETTY_VERSION_PROPERTY)}")
         dependencies.add(jettyDeploy)
+
+        Dependency jettyPlus = projectDependencies.create(
+                "org.eclipse.jetty:jetty-plus:${Util.pluginProperties.getProperty(JETTY_VERSION_PROPERTY)}")
+        dependencies.add(jettyPlus)
+
+        Dependency jettyWebsocketServer = projectDependencies.create("org.eclipse.jetty.websocket:websocket-server:" +
+                "${Util.pluginProperties.getProperty(JETTY_VERSION_PROPERTY)}")
+        dependencies.add(jettyWebsocketServer)
 
         Dependency asm = projectDependencies.create('org.ow2.asm:asm:9.6')
         dependencies.add(asm)
